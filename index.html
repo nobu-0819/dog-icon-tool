@@ -58,7 +58,13 @@
 <div id="result">
 ここに今日のプロンプトが表示されます
 </div>
+    
+<br>
 
+<button onclick="copyPrompt()">
+コピーする
+</button>
+    
 <script>
 
 const themes = [
@@ -132,6 +138,14 @@ document.getElementById("result").innerText = prompt;
 }
 
 </script>
+function copyPrompt(){
 
+const text =
+document.getElementById("result").innerText;
+
+navigator.clipboard.writeText(text);
+
+alert("プロンプトをコピーしました！");
+}
 </body>
 </html>
