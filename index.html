@@ -7,7 +7,7 @@
 
 <style>
 body{
-    font-family: sans-serif;
+    font-family:sans-serif;
     background:#f4f4f4;
     padding:30px;
     text-align:center;
@@ -28,6 +28,10 @@ button{
     margin:10px;
 }
 
+button:hover{
+    opacity:0.9;
+}
+
 #result{
     margin-top:30px;
     background:white;
@@ -39,7 +43,7 @@ button{
     text-align:left;
     box-shadow:0 5px 15px rgba(0,0,0,0.1);
     white-space:pre-wrap;
-    line-height:1.7;
+    line-height:1.8;
 }
 </style>
 </head>
@@ -48,12 +52,20 @@ button{
 
 <h1>🐶 今日の犬アイコン生成ツール</h1>
 
-<button onclick="generatePrompt()">今日の画像を作る</button>
-<button onclick="copyPrompt()">コピーする</button>
+<button onclick="generatePrompt()">
+今日の画像を作る
+</button>
 
-<div id="result">ここに今日のプロンプトが表示されます</div>
+<button onclick="copyPrompt()">
+コピーする
+</button>
+
+<div id="result">
+ここに今日のプロンプトが表示されます
+</div>
 
 <script>
+
 const themes = [
 "浮世絵風",
 "サイバーパンク風",
@@ -65,11 +77,39 @@ const themes = [
 "ぬいぐるみ風",
 "LINEスタンプ風",
 "油絵風",
-"ディズニー風ではない海外アニメ風",
-"ジブリ風ではない優しいアニメ風",
+"海外アニメ風",
+"優しい絵本風",
 "シュールな現代アート風",
 "レトロゲーム風",
-"新聞広告風"
+"新聞広告風",
+"ゴジラ映画風",
+"昭和レトロ広告風",
+"週刊誌表紙風",
+"都市伝説風",
+"ホラー映画風",
+"エモい青春映画風",
+"深夜番組風",
+"ニュース速報風",
+"ファンタジーRPG風",
+"中世ヨーロッパ風",
+"未来都市風",
+"廃墟アート風",
+"水墨画風",
+"切り絵風",
+"ヴィンテージ写真風",
+"アメコミ風",
+"たまごっち風",
+"フィギュア箱風",
+"プラモデル箱絵風",
+"ゲーム実況サムネ風",
+"YouTubeサムネ風",
+"AI暴走風",
+"異世界転生風",
+"ラスボス風",
+"巨大怪獣風",
+"ゆるキャラ風",
+"高級雑誌風",
+"サウナ雑誌表紙風"
 ];
 
 const situations = [
@@ -82,12 +122,61 @@ const situations = [
 "ラーメンを食べている",
 "空を飛んでいる",
 "雨の日にたそがれている",
-"サウナでととのっている"
+"サウナでととのっている",
+"コンビニでバイトしている",
+"巨大ロボに乗っている",
+"電車で寝ている",
+"ラーメン屋を経営している",
+"温泉街を歩いている",
+"屋台でたこ焼きを焼いている",
+"サウナ後に外気浴している",
+"深夜の自販機の前にいる",
+"無人島で焚き火している",
+"宇宙船を操縦している",
+"ホラーゲームから逃げている",
+"魔王になっている",
+"勇者になっている",
+"巨大プリンを食べている",
+"海辺で黄昏れている",
+"渋谷スクランブル交差点にいる",
+"銭湯の番台をしている",
+"ガチャガチャの中に閉じ込められている",
+"雪山で遭難しかけている",
+"中華料理を爆食いしている",
+"夜景を見ながら泣いている",
+"カラオケで熱唱している",
+"ゲームセンターで遊んでいる",
+"昭和の喫茶店にいる"
+];
+
+const moods = [
+"かわいい",
+"エモい",
+"切ない",
+"狂気",
+"意味不明",
+"圧倒的",
+"ダーク",
+"神秘的",
+"幸せそう",
+"眠そう",
+"絶望感",
+"テンションMAX",
+"シュール",
+"孤独感",
+"青春感"
 ];
 
 function generatePrompt(){
-    const randomTheme = themes[Math.floor(Math.random() * themes.length)];
-    const randomSituation = situations[Math.floor(Math.random() * situations.length)];
+
+    const randomTheme =
+    themes[Math.floor(Math.random() * themes.length)];
+
+    const randomSituation =
+    situations[Math.floor(Math.random() * situations.length)];
+
+    const randomMood =
+    moods[Math.floor(Math.random() * moods.length)];
 
     const prompt =
 `今日のテーマ：
@@ -95,6 +184,9 @@ ${randomTheme}
 
 シチュエーション：
 ${randomSituation}
+
+感情：
+${randomMood}
 
 画像生成プロンプト：
 
@@ -111,22 +203,38 @@ ${randomSituation}
 ${randomTheme} の世界観で、
 ${randomSituation}。
 
+全体の雰囲気は
+「${randomMood}」。
+
+感情が伝わる演出。
+
 LINEアイコン向け。
 中央構図。
 高品質。`;
 
-    document.getElementById("result").innerText = prompt;
+document.getElementById("result").innerText = prompt;
+
 }
 
 function copyPrompt(){
-    const text = document.getElementById("result").innerText;
 
-    navigator.clipboard.writeText(text).then(function(){
-        alert("プロンプトをコピーしました！");
-    }).catch(function(){
-        alert("コピーに失敗しました。文章を長押ししてコピーしてください。");
-    });
+const text =
+document.getElementById("result").innerText;
+
+navigator.clipboard.writeText(text)
+.then(function(){
+
+alert("プロンプトをコピーしました！");
+
+})
+.catch(function(){
+
+alert("コピーに失敗しました");
+
+});
+
 }
+
 </script>
 
 </body>
