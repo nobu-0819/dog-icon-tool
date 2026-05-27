@@ -6,44 +6,41 @@
 <title>今日の犬アイコン生成ツール</title>
 
 <style>
-    body{
-        font-family: sans-serif;
-        background:#f4f4f4;
-        padding:30px;
-        text-align:center;
-    }
+body{
+    font-family: sans-serif;
+    background:#f4f4f4;
+    padding:30px;
+    text-align:center;
+}
 
-    h1{
-        color:#333;
-    }
+h1{
+    color:#333;
+}
 
-    button{
-        background:#ff7b54;
-        color:white;
-        border:none;
-        padding:15px 30px;
-        font-size:18px;
-        border-radius:12px;
-        cursor:pointer;
-        transition:0.2s;
-    }
+button{
+    background:#ff7b54;
+    color:white;
+    border:none;
+    padding:15px 30px;
+    font-size:18px;
+    border-radius:12px;
+    cursor:pointer;
+    margin:10px;
+}
 
-    button:hover{
-        transform:scale(1.05);
-    }
-
-    #result{
-        margin-top:30px;
-        background:white;
-        padding:20px;
-        border-radius:15px;
-        max-width:700px;
-        margin-left:auto;
-        margin-right:auto;
-        text-align:left;
-        box-shadow:0 5px 15px rgba(0,0,0,0.1);
-        white-space:pre-wrap;
-    }
+#result{
+    margin-top:30px;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    max-width:700px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:left;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    white-space:pre-wrap;
+    line-height:1.7;
+}
 </style>
 </head>
 
@@ -51,22 +48,12 @@
 
 <h1>🐶 今日の犬アイコン生成ツール</h1>
 
-<button onclick="generatePrompt()">
-今日の画像を作る
-</button>
+<button onclick="generatePrompt()">今日の画像を作る</button>
+<button onclick="copyPrompt()">コピーする</button>
 
-<div id="result">
-ここに今日のプロンプトが表示されます
-</div>
-    
-<br>
+<div id="result">ここに今日のプロンプトが表示されます</div>
 
-<button onclick="copyPrompt()">
-コピーする
-</button>
-    
 <script>
-
 const themes = [
 "浮世絵風",
 "サイバーパンク風",
@@ -99,15 +86,11 @@ const situations = [
 ];
 
 function generatePrompt(){
+    const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+    const randomSituation = situations[Math.floor(Math.random() * situations.length)];
 
-    const randomTheme =
-    themes[Math.floor(Math.random() * themes.length)];
-
-    const randomSituation =
-    situations[Math.floor(Math.random() * situations.length)];
-
-    const prompt = `
-今日のテーマ：
+    const prompt =
+`今日のテーマ：
 ${randomTheme}
 
 シチュエーション：
@@ -130,22 +113,21 @@ ${randomSituation}。
 
 LINEアイコン向け。
 中央構図。
-高品質。
-`;
+高品質。`;
 
-document.getElementById("result").innerText = prompt;
-
+    document.getElementById("result").innerText = prompt;
 }
 
-</script>
 function copyPrompt(){
+    const text = document.getElementById("result").innerText;
 
-const text =
-document.getElementById("result").innerText;
-
-navigator.clipboard.writeText(text);
-
-alert("プロンプトをコピーしました！");
+    navigator.clipboard.writeText(text).then(function(){
+        alert("プロンプトをコピーしました！");
+    }).catch(function(){
+        alert("コピーに失敗しました。文章を長押ししてコピーしてください。");
+    });
 }
+</script>
+
 </body>
 </html>
