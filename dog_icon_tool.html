@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今日の犬アイコン生成ツール</title>
+
+<style>
+    body{
+        font-family: sans-serif;
+        background:#f4f4f4;
+        padding:30px;
+        text-align:center;
+    }
+
+    h1{
+        color:#333;
+    }
+
+    button{
+        background:#ff7b54;
+        color:white;
+        border:none;
+        padding:15px 30px;
+        font-size:18px;
+        border-radius:12px;
+        cursor:pointer;
+        transition:0.2s;
+    }
+
+    button:hover{
+        transform:scale(1.05);
+    }
+
+    #result{
+        margin-top:30px;
+        background:white;
+        padding:20px;
+        border-radius:15px;
+        max-width:700px;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:left;
+        box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        white-space:pre-wrap;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>🐶 今日の犬アイコン生成ツール</h1>
+
+<button onclick="generatePrompt()">
+今日の画像を作る
+</button>
+
+<div id="result">
+ここに今日のプロンプトが表示されます
+</div>
+
+<script>
+
+const themes = [
+"浮世絵風",
+"サイバーパンク風",
+"ピカソ風",
+"落書き風",
+"映画ポスター風",
+"80年代アニメ風",
+"ガチャガチャ景品風",
+"ぬいぐるみ風",
+"LINEスタンプ風",
+"油絵風",
+"ディズニー風ではない海外アニメ風",
+"ジブリ風ではない優しいアニメ風",
+"シュールな現代アート風",
+"レトロゲーム風",
+"新聞広告風"
+];
+
+const situations = [
+"夜の街を歩いている",
+"宇宙にいる",
+"温泉に入っている",
+"巨大化している",
+"コンビニ店員になっている",
+"魔法使いになっている",
+"ラーメンを食べている",
+"空を飛んでいる",
+"雨の日にたそがれている",
+"サウナでととのっている"
+];
+
+function generatePrompt(){
+
+    const randomTheme =
+    themes[Math.floor(Math.random() * themes.length)];
+
+    const randomSituation =
+    situations[Math.floor(Math.random() * situations.length)];
+
+    const prompt = `
+今日のテーマ：
+${randomTheme}
+
+シチュエーション：
+${randomSituation}
+
+画像生成プロンプト：
+
+小型のミックス犬。
+トイプードル×チワワ×ダックス風。
+
+黒・グレー・茶色が混ざった、
+少しウェーブのあるふわふわの中毛。
+
+深い茶色のアーモンド形の目。
+少し長めのマズル。
+リアルな犬らしい自然な体型。
+
+${randomTheme} の世界観で、
+${randomSituation}。
+
+LINEアイコン向け。
+中央構図。
+高品質。
+`;
+
+document.getElementById("result").innerText = prompt;
+
+}
+
+</script>
+
+</body>
+</html>
