@@ -28,16 +28,12 @@ button{
     margin:10px;
 }
 
-button:hover{
-    opacity:0.9;
-}
-
 #result{
     margin-top:30px;
     background:white;
     padding:20px;
     border-radius:15px;
-    max-width:700px;
+    max-width:760px;
     margin-left:auto;
     margin-right:auto;
     text-align:left;
@@ -52,19 +48,51 @@ button:hover{
 
 <h1>🐶 今日の犬アイコン生成ツール</h1>
 
-<button onclick="generatePrompt()">
-今日の画像を作る
-</button>
+<button onclick="generatePrompt()">今日の画像を作る</button>
+<button onclick="copyPrompt()">コピーする</button>
 
-<button onclick="copyPrompt()">
-コピーする
-</button>
-
-<div id="result">
-ここに今日のプロンプトが表示されます
-</div>
+<div id="result">ここに今日のプロンプトが表示されます</div>
 
 <script>
+const dogProfile = `
+【犬の固定設定】
+実在する犬らしさを保つ。
+擬人化しすぎない。
+
+小型のヨークシャーテリア寄りのミックス犬。
+体は小さく、やや細身でコンパクト。
+自然な犬らしい体型。
+
+体の毛は短めにトリミングされている。
+体色は黒〜濃いグレー、シルバーグレーが中心。
+
+顔まわりは少しふわっとしている。
+頬、口まわり、眉、胸、足先に温かい茶色〜タン色の毛がある。
+
+目は大きめで、深い茶色。
+丸みのあるアーモンド形。
+感情が伝わる、少しうるっとした表情の目。
+
+鼻は小さめの黒い鼻。
+マズルは短すぎず長すぎない。
+口まわりに茶色のふわっとした毛がある。
+
+明るい茶色の眉毛がはっきりある。
+この眉毛は重要。
+
+耳は大きめの三角形。
+左右で少し形が違う。
+片耳が少し立ち、もう片方が少し寝るような自然な耳。
+耳の毛は少しふわっとしている。
+
+全体的に、眠そうで賢そうで、少し切ない可愛さがある。
+
+過度にプードルっぽくしない。
+毛をモコモコにしすぎない。
+鼻を長くしすぎない。
+目をアニメのように大きくしすぎない。
+別犬にしない。
+`;
 
 const themes = [
 "浮世絵風",
@@ -168,15 +196,9 @@ const moods = [
 ];
 
 function generatePrompt(){
-
-    const randomTheme =
-    themes[Math.floor(Math.random() * themes.length)];
-
-    const randomSituation =
-    situations[Math.floor(Math.random() * situations.length)];
-
-    const randomMood =
-    moods[Math.floor(Math.random() * moods.length)];
+    const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+    const randomSituation = situations[Math.floor(Math.random() * situations.length)];
+    const randomMood = moods[Math.floor(Math.random() * moods.length)];
 
     const prompt =
 `今日のテーマ：
@@ -190,15 +212,7 @@ ${randomMood}
 
 画像生成プロンプト：
 
-小型のミックス犬。
-トイプードル×チワワ×ダックス風。
-
-黒・グレー・茶色が混ざった、
-少しウェーブのあるふわふわの中毛。
-
-深い茶色のアーモンド形の目。
-少し長めのマズル。
-リアルな犬らしい自然な体型。
+${dogProfile}
 
 ${randomTheme} の世界観で、
 ${randomSituation}。
@@ -209,32 +223,25 @@ ${randomSituation}。
 感情が伝わる演出。
 
 LINEアイコン向け。
+正方形。
 中央構図。
+顔と目の印象を重視。
 高品質。`;
 
-document.getElementById("result").innerText = prompt;
-
+    document.getElementById("result").innerText = prompt;
 }
 
 function copyPrompt(){
+    const text = document.getElementById("result").innerText;
 
-const text =
-document.getElementById("result").innerText;
-
-navigator.clipboard.writeText(text)
-.then(function(){
-
-alert("プロンプトをコピーしました！");
-
-})
-.catch(function(){
-
-alert("コピーに失敗しました");
-
-});
-
+    navigator.clipboard.writeText(text)
+    .then(function(){
+        alert("プロンプトをコピーしました！");
+    })
+    .catch(function(){
+        alert("コピーに失敗しました。文章を長押ししてコピーしてください。");
+    });
 }
-
 </script>
 
 </body>
